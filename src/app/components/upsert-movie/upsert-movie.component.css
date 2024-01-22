@@ -1,0 +1,45 @@
+* {
+    color: #fff;
+}
+
+.movie-img-container {
+    position: relative;
+}
+
+.movie-img {
+    height: 400px;
+    width: 400px;
+    border: 1px dotted white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.movie-img::after {
+    content: "Drop an Image here";
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+input[type="text"] {
+    margin-bottom: 20px;
+    background-color: #224957;
+    border-style: none;
+}
+
+::placeholder {
+  color: #ffffff;
+}
+
+.submit {
+  background-color: #2BD17E;
+  border-style: none;
+}
+
+.cancel {
+  background-color: #093545;
+  border-style: 1px solid #fff;
+}

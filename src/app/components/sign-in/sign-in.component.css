@@ -1,0 +1,38 @@
+.card {
+    background-color: #093545;
+    color: #ffffff;
+    width: 300px;
+    border-style: none;
+    position: relative;
+}
+
+.horizontal-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  /* left: 50%; */
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+}
+
+
+input[type="email"], input[type="password"] {
+    background-color: #224957;
+    border-style: none;
+    
+}
+
+::placeholder {
+  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: #2BD17E;
+  border-style: none;
+}

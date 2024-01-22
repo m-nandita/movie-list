@@ -1,0 +1,11 @@
+<div *ngIf="movieList; then movieList else emptyList"></div>
+<ng-template #movieList>
+  <div class="container">
+    <div>
+      <h2 class="mb-5">Your movie list is empty</h2>
+      <button type="submit" class="btn btn-primary">Add new movie</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #emptyList>
+</ng-template>
