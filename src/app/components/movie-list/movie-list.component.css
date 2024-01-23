@@ -1,6 +1,37 @@
 * {
-color: #ffffff;
+  color: #ffffff;
 }
+
+.movie-list-container {
+  width: 1440px;
+}
+
+.movie-empty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-primary {
-    background-color: 
+  background-color: #2BD17E;
+  border-style: none;
+}
+
+.card {
+  background-color: #092C39;
+  width: 18rem;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.movie-card {
+  display:flex;
+  height: 200px;
+}
+
+.add-movie {
+  border: 1px solid #ffffff;
+  border-radius: 60%;
+  text-decoration: none;
 }

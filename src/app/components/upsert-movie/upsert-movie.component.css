@@ -7,14 +7,20 @@
 }
 
 .movie-img {
-    height: 400px;
-    width: 400px;
-    border: 1px dotted white;
-    border-radius: 10px;
-    overflow: hidden;
+    display: none
 }
 
-.movie-img::after {
+.form-container {
+  width: 800px
+}
+.file-input-label {
+  height: 400px;
+  width: 400px;
+  border: 1px dotted #ffffff;
+  border-radius: 10px;
+}
+
+.file-input-label::after {
     content: "Drop an Image here";
     margin: 0;
     position: absolute;
@@ -41,5 +47,5 @@ input[type="text"] {
 
 .cancel {
   background-color: #093545;
-  border-style: 1px solid #fff;
+  border-style: 1px solid #ffffff;
 }

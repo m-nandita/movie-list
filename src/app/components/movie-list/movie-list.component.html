@@ -1,11 +1,31 @@
-<div *ngIf="movieList; then movieList else emptyList"></div>
+<div *ngIf="movies; then movieList else emptyList"></div>
 <ng-template #movieList>
-  <div class="container">
-    <div>
-      <h2 class="mb-5">Your movie list is empty</h2>
-      <button type="submit" class="btn btn-primary">Add new movie</button>
+  <div class="movie-list-container">
+    <div class="heading d-flex justify-content-between mb-5">
+      <div class="d-flex">
+        <h2>My Movies</h2>
+        <a href='/addmovie' class="add-movie">+</a>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary">Logout</button>
+      </div>
+    </div>
+    <div class="movie-card row">
+      <div *ngFor="let movie of movies" class="col-3">
+        <div class="card" (click)="edit_movie(movie)">
+          <img src="../assets/images/{{movie.img_name}}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{movie.title}}</h5>
+            <p class="card-text">{{movie.published_year}}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>
 <ng-template #emptyList>
+  <div class="movie-empty-container">
+    <h2 class="mb-5">Your movie list is empty</h2>
+    <button type="submit" class="btn btn-primary">Add new movie</button>
+  </div>
 </ng-template>

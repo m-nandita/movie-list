@@ -1,22 +1,17 @@
-<div class="card p-5 horizontal-center">
-  <!-- <div class=""> -->
-    <h1 class="pb-4">Sign In</h1>
-
-    <div class="mb-3">
-      <input type="email" class="form-control" id="emailInput" placeholder="Email">
-    </div>
-    
-    <div class="mb-3">
-      <input type="password" class="form-control" id="passwordInput" placeholder="Password">
-    </div>
-
-    <div class="mb-3">
-      <input type="checkbox" id="rememberMe" /> Remember Me
-    </div>
-
-    <div class="mb-3">
-      <button type="button" class="btn btn-primary" id="login"> Login </button>
-    </div>
-  <!-- </div> -->
-
-<div>
+<div class="sign-in-container">
+  <div class="heading mb-5 text-center">
+    <h1>Sign In</h1>
+  </div>
+  <div>
+    <form>
+      <input type="email" class="form-control mb-4" id="emailInput" placeholder="Email">
+      <input type="password" class="form-control mb-4" id="passwordInput" placeholder="Password">
+      <div class="text-center">
+        <input type="checkbox" class="form-check-input mb-4" /> Remember Me
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary col-12" (click)="login()">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

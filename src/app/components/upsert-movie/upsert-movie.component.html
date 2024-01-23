@@ -1,19 +1,20 @@
 <div *ngIf="isCreate; then create; else edit"></div>
 <ng-template #create>
-  <div class="container">
+  <div class="add-movie-container">
     <div class="heading m-5">
       <h1>Create a new movie</h1>
     </div>
-    <div class="d-flex flex-row w-75 justify-content-around">
+    <div class="form-container d-flex flex-row justify-content-around">
       <div class="movie-img-container">
-        <input type="file" class="movie-img" />
+        <input type="file" class="movie-img" id ='file-input'/>
+        <label class="file-input-label" for="file-input"></label>
       </div>
-      <div class="form-container">
-        <input type="text" class="form-control" id="title" placeholder="Title" />
-        <input type="text" class="form-control" id="publishedYear" placeholder="Published Year" />
+      <div class="input-container pt-5">
+        <input type="text" class="form-control" [(ngModel)]="title" placeholder="Title" />
+        <input type="text" class="form-control" [(ngModel)]="published_year" placeholder="Published Year" />
         <div class="d-flex flex-row justify-content-around">
           <button type="button" class="btn btn-primary cancel">Cancel</button>
-          <button type="button" class="btn btn-primary submit">Submit</button>
+          <button type="button" class="btn btn-primary submit" (click)="add_movie()">Submit</button>
         </div>
       </div>
     </div>
@@ -24,16 +25,17 @@
     <div class="heading m-5">
       <h1>Edit movie</h1>
     </div>
-    <div class="d-flex flex-row w-75 justify-content-around">
+    <div class="form-container d-flex flex-row justify-content-around">
       <div class="movie-img-container">
-        <input type="file" class="movie-img" />
+        <input type="file" class="movie-img" id ='file-input' [ngModel]="movie_image"/>
+        <label class="file-input-label" for="file-input"></label>
       </div>
-      <div class="form-container">
-        <input type="text" class="form-control" id="title" placeholder="Title" />
-        <input type="text" class="form-control" id="publishedYear" placeholder="Published Year" />
+      <div class="input-container pt-5">
+        <input type="text" class="form-control" [ngModel]="title" placeholder="Title" />
+        <input type="text" class="form-control" [ngModel]="published_year" placeholder="Published Year" />
         <div class="d-flex flex-row justify-content-around">
-          <button type="button" class="btn btn-primary cancel">Cancel</button>
-          <button type="button" class="btn btn-primary submit">Update</button>
+          <button type="button" class="btn btn-primary cancel" (click)="cancel()">Cancel</button>
+          <button type="button" class="btn btn-primary submit" (click)="update_movie()">Update</button>
         </div>
       </div>
     </div>
