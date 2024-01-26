@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/models/movie';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-upsert-movie',
@@ -10,14 +11,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UpsertMovieComponent {
   isCreate?: boolean;
-  constructor(private httpClient: HttpClient, private router: Router) {}
   title?: string;
   published_year?: number;
-  movie_image?: string;
+  poster_image?: any;
   movie?: any;
-  new_movie?: Movie | undefined;
+  new_movie?: any;
+  selectedImage?: any = null;
+
+  constructor(private router: Router, private movieService: MovieService) {}
+
   ngOnInit() {
-    // this.href = this.router.url;
+
     if(this.router.url == '/addmovie') {
       this.isCreate = true;
     }
@@ -29,12 +33,33 @@ export class UpsertMovieComponent {
     }
   }
 
-  add_movie() {
+  select_poster(event: any) {
+    this.poster_image = event.target.files[0]
+    this.selectedImage = this.poster_image;
+    const reader = new FileReader();
+        reader.onload = e => this.selectedImage = reader.result;
 
+        reader.readAsDataURL(this.selectedImage)
   }
 
-  cancel() {
+  add_movie() {
+    let new_movie = {
+      title: this.title,
+      published_year: this.published_year,
+    }
 
+    // if (this.file) {
+    //   this.movieService.createMovie(this.file).subscribe(resp => {
+    //     alert("Uploaded")
+    //   })
+    // } else {
+    //   alert("Please select a file first")
+    // }
+  }
+
+
+  cancel() {
+    this.router.navigate(['/movielist'])
   }
 
   update_movie() {

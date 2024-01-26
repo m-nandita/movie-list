@@ -5,7 +5,7 @@
 input[type="email"], input[type="password"] {
     background-color: #224957;
     border-style: none;
-
+    color: #ffffff;
 }
 
 ::placeholder {

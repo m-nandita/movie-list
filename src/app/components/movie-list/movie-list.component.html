@@ -4,16 +4,16 @@
     <div class="heading d-flex justify-content-between mb-5">
       <div class="d-flex">
         <h2>My Movies</h2>
-        <a href='/addmovie' class="add-movie">+</a>
+        <a href='/addmovie' class="add-movie"><img src="../../../assets/images/addIcon.png" /></a>
       </div>
       <div>
-        <button type="submit" class="btn btn-primary">Logout</button>
+        <img src="../../../assets/images/logoutIcon.png" (click)="logout()"/>
       </div>
     </div>
     <div class="movie-card row">
       <div *ngFor="let movie of movies" class="col-3">
         <div class="card" (click)="edit_movie(movie)">
-          <img src="../assets/images/{{movie.img_name}}" class="card-img-top">
+          <img src="{{ movie.url }}" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{movie.title}}</h5>
             <p class="card-text">{{movie.published_year}}</p>
@@ -26,6 +26,6 @@
 <ng-template #emptyList>
   <div class="movie-empty-container">
     <h2 class="mb-5">Your movie list is empty</h2>
-    <button type="submit" class="btn btn-primary">Add new movie</button>
+    <button type="submit" class="btn btn-primary" (click)="add_new_movie()">Add new movie</button>
   </div>
 </ng-template>
