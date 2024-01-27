@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie } from '../models/movie'
 @Injectable({
@@ -18,18 +18,29 @@ export class MovieService {
     return this.http.get(`${this.baseUrl}/${id}`)
   }
 
-  createMovie(data: any): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
-    formData.append('file', data);
+  createMovie(data: any, file: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('published_year', data.published_year);
+    formData.append('poster_img', file)
     const req = new HttpRequest('POST', `${this.baseUrl}`, formData, {
       responseType: 'json'
     });
     return this.http.request(req);
-    // return this.http.post(`${this.baseUrl}`, data)
   }
 
-  updateMovie(data: any, id: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+  updateMovie(data: any, id: number, file?: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('published_year', data.published_year);
+    if(file) {
+      formData.append('poster_img', file)
+    }
+    const req = new HttpRequest('PUT', `${this.baseUrl}/${id}`, formData, {
+      responseType: 'json'
+    });
+    return this.http.request(req);
+    // return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
   deleteMovie(id: number): Observable<any> {

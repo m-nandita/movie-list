@@ -21,6 +21,11 @@
         </div>
       </div>
     </div>
+    <div class="">
+      <div *ngFor="let x of numSequence(2)">
+        <button type="button" (click)="loadPage($event)">{{ x }}</button>
+      </div>
+    </div>
   </div>
 </ng-template>
 <ng-template #emptyList>

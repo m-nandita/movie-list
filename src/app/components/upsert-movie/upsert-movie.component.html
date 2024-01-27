@@ -9,7 +9,7 @@
       <div class="movie-img-container">
         <input type="file" class="movie-img" id ='file-input' name="poster_img" (change)="select_poster($event)"/>
         <div *ngIf="selectedImage; else img_label">
-          <img src="{{ selectedImage }}" />
+          <img src="{{ selectedImage }}" (click)="replace()"/>
         </div>
         <ng-template #img_label>
           <label class="file-input-label" for="file-input" >
@@ -37,15 +37,23 @@
     <div>
       <form class="form-container d-flex flex-row justify-content-around">
       <div class="movie-img-container">
-        <input type="file" class="movie-img" id ='file-input' name="poster_img" />
-        <label class="file-input-label" for="file-input"></label>
+        <!-- <input type="file" class="movie-img" id ='file-input' name="poster_img" /> -->
+        <!-- <label class="file-input-label" for="file-input"></label> -->
+        <input type="file" class="movie-img" id ='file-input' name="poster_img" (change)="select_poster($event)"/>
+        <div *ngIf="selectedImage; else img_label">
+          <img src="{{ selectedImage }}" (click)="replace()"/>
+        </div>
+        <ng-template #img_label>
+          <label class="file-input-label" for="file-input" >
+          </label>
+        </ng-template>
       </div>
       <div class="input-container pt-5">
         <input type="text" class="form-control" name="title" [(ngModel)]="title" placeholder="Title" />
         <input type="text" class="form-control" name="published_year" [(ngModel)]="published_year" placeholder="Published Year" />
         <div class="d-flex flex-row justify-content-around">
           <button type="button" class="btn btn-primary cancel" (click)="cancel()">Cancel</button>
-          <button type="button" class="btn btn-primary submit" (click)="update_movie()">Update</button>
+          <button type="button" class="btn btn-primary submit" (click)="update_movie($event)">Update</button>
         </div>
       </div>
       </form>

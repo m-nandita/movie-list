@@ -11,12 +11,13 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class UpsertMovieComponent {
   isCreate?: boolean;
+  movie_id?: number | undefined;
   title?: string;
   published_year?: number;
-  poster_image?: any;
+  // poster_image?: any;
   movie?: any;
-  new_movie?: any;
   selectedImage?: any = null;
+  posterFile: File  | null = null;
 
   constructor(private router: Router, private movieService: MovieService) {}
 
@@ -28,33 +29,38 @@ export class UpsertMovieComponent {
     else if(this.router.url == '/editmovie') {
       this.isCreate = false;
       this.movie = this.router.lastSuccessfulNavigation?.extras
+      this.movie_id = this.movie.id;
       this.title = this.movie.title;
       this.published_year = this.movie.published_year;
+      this.selectedImage = this.movie.url;
+      this.posterFile = this.movie.poster_img;
+      console.log(this.movie)
     }
   }
 
   select_poster(event: any) {
-    this.poster_image = event.target.files[0]
-    this.selectedImage = this.poster_image;
-    const reader = new FileReader();
-        reader.onload = e => this.selectedImage = reader.result;
+    this.selectedImage = event.target.files[0];
+    this.posterFile = event.target.files[0];
+    if(this.selectedImage) {
+      const reader = new FileReader();
+      reader.onload = e => this.selectedImage = reader.result;
+      reader.readAsDataURL(this.selectedImage)
+    }
+  }
 
-        reader.readAsDataURL(this.selectedImage)
+  replace() {
+    if(this.selectedImage) {
+      this.selectedImage = null;
+    }
   }
 
   add_movie() {
-    let new_movie = {
-      title: this.title,
-      published_year: this.published_year,
+    if(this.selectedImage) {
+      let new_movie = {title: this.title, published_year: this.published_year}
+      this.movieService.createMovie(new_movie, this.posterFile).subscribe((event: any) => {
+        console.log('Image uploaded')
+      })
     }
-
-    // if (this.file) {
-    //   this.movieService.createMovie(this.file).subscribe(resp => {
-    //     alert("Uploaded")
-    //   })
-    // } else {
-    //   alert("Please select a file first")
-    // }
   }
 
 
@@ -62,7 +68,20 @@ export class UpsertMovieComponent {
     this.router.navigate(['/movielist'])
   }
 
-  update_movie() {
-
+  update_movie(event: any) {
+    if(this.movie_id) {
+      let movie = {title: this.title, published_year: this.published_year}
+      if(this.selectedImage) {
+        this.movieService.updateMovie(movie, this.movie_id, this.posterFile).subscribe((event: any) => {
+          console.log("Updated data");
+        })
+      }
+      else {
+        this.movieService.updateMovie(movie, this.movie_id).subscribe((event: any) => {
+          console.log("Updated data");
+        })
+      }
+      this.router.navigate(['/movielist'])
+    }
   }
 }
