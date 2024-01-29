@@ -10,11 +10,11 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./upsert-movie.component.css']
 })
 export class UpsertMovieComponent {
+  
   isCreate?: boolean;
   movie_id?: number | undefined;
   title?: string;
   published_year?: number;
-  // poster_image?: any;
   movie?: any;
   selectedImage?: any = null;
   posterFile: File  | null = null;
@@ -33,6 +33,7 @@ export class UpsertMovieComponent {
       this.title = this.movie.title;
       this.published_year = this.movie.published_year;
       this.selectedImage = this.movie.url;
+      this.posterFile
     }
   }
 
@@ -72,16 +73,9 @@ export class UpsertMovieComponent {
   update_movie(event: any) {
     if(this.movie_id) {
       let movie = {title: this.title, published_year: this.published_year}
-      if(this.selectedImage) {
-        this.movieService.updateMovie(movie, this.movie_id, this.posterFile).subscribe((event: any) => {
-          console.log("Updated data");
-        })
-      }
-      else {
-        this.movieService.updateMovie(movie, this.movie_id).subscribe((event: any) => {
-          console.log("Updated data");
-        })
-      }
+      this.movieService.updateMovie(movie, this.movie_id, this.posterFile).subscribe((event: any) => {
+        console.log("Updated data");
+      })
       this.router.navigate(['/movielist'])
     }
   }

@@ -12,7 +12,8 @@ export class SignInComponent {
   constructor(private router: Router) {}
 
   login() {
-    if(this.email == "admin@email.com" && this.password == "password") {
+    if(this.email && this.password) {
+      // TODO: Implement authentication logic here
       this.router.navigate(['./movielist'])
     }
   }

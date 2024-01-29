@@ -1,16 +1,15 @@
 * {
   color: #ffffff;
 }
-
 .movie-list-container {
   width: 100%;
 }
-
 .movie-empty-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .btn-primary {
@@ -28,4 +27,22 @@
 .movie-card {
   display:flex;
   height: 200px;
+}
+
+.logout img {
+  content: url('../../../assets/images/logoutIcon.png')
+ }
+
+@media screen and (max-width: 428px) {
+   .card {
+    width: 100%;
+   }
+  
+   .card-width {
+    width: 50%;
+   }
+
+   .logout img {
+    content: url('../../../assets/images/logoutMobile.png')
+   }
 }

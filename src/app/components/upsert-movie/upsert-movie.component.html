@@ -5,27 +5,26 @@
       <h1>Create a new movie</h1>
     </div>
     <div>
-      <form class="form-container d-flex flex-row justify-content-around" >
-      <div class="movie-img-container">
-        <input type="file" class="movie-img" id ='file-input' name="poster_img" (change)="select_poster($event)"/>
-        <div *ngIf="selectedImage; else img_label">
-          <img src="{{ selectedImage }}" (click)="replace()"/>
+      <form class="form-container" >
+        <div class="input-container pt-3">
+          <input type="text" class="form-control" name="title" [(ngModel)]="title" placeholder="Title" />
+          <input type="text" class="form-control" name="published_year" [(ngModel)]="published_year" placeholder="Published Year" />
         </div>
-        <ng-template #img_label>
-          <label class="file-input-label" for="file-input" >
-          </label>
-        </ng-template>
-
-      </div>
-      <div class="input-container pt-5">
-        <input type="text" class="form-control" name="title" [(ngModel)]="title" placeholder="Title" />
-        <input type="text" class="form-control" name="published_year" [(ngModel)]="published_year" placeholder="Published Year" />
-        <div class="d-flex flex-row justify-content-around">
+        <div class="movie-img-container">
+          <input type="file" class="movie-img" id ='file-input' name="poster_img" (change)="select_poster($event)"/>
+          <div *ngIf="selectedImage; else img_label">
+            <img src="{{ selectedImage }}" (click)="replace()" height="350px" width="350px" />
+          </div>
+          <ng-template #img_label>
+            <label class="file-input-label" for="file-input" >
+            </label>
+          </ng-template>
+        </div>  
+        <div class="button-container pt-3">
           <button type="button" class="btn btn-primary cancel" (click)="cancel()">Cancel</button>
           <button type="button" class="btn btn-primary submit" (click)="add_movie()">Submit</button>
         </div>
-      </div>
-    </form>
+      </form>
     </div>
   </div>
 </ng-template>
@@ -35,25 +34,25 @@
       <h1>Edit movie</h1>
     </div>
     <div>
-      <form class="form-container d-flex flex-row justify-content-around">
-      <div class="movie-img-container">
-        <input type="file" class="movie-img" id ='file-input' name="poster_img" (change)="select_poster($event)"/>
-        <div *ngIf="selectedImage; else img_label">
-          <img src="{{ selectedImage }}" (click)="replace()" height="350px" width="200px"/>
+      <form class="form-container">
+        <div class="input-container pt-3">
+          <input type="text" class="form-control" name="title" [(ngModel)]="title" placeholder="Title" />
+          <input type="text" class="form-control" name="published_year" [(ngModel)]="published_year" placeholder="Published Year" />
         </div>
-        <ng-template #img_label>
-          <label class="file-input-label" for="file-input" >
-          </label>
-        </ng-template>
-      </div>
-      <div class="input-container pt-5">
-        <input type="text" class="form-control" name="title" [(ngModel)]="title" placeholder="Title" />
-        <input type="text" class="form-control" name="published_year" [(ngModel)]="published_year" placeholder="Published Year" />
-        <div class="d-flex flex-row justify-content-around">
+        <div class="movie-img-container">
+          <input type="file" class="movie-img" id ='file-input' name="poster_img" (change)="select_poster($event)"/>
+          <div *ngIf="selectedImage; else img_label">
+            <img src="{{ selectedImage }}" (click)="replace()" height="350px" width="350px" />
+          </div>
+          <ng-template #img_label>
+            <label class="file-input-label" for="file-input" >
+            </label>
+          </ng-template>
+        </div>
+        <div class="button-container pt-3">
           <button type="button" class="btn btn-primary cancel" (click)="cancel()">Cancel</button>
           <button type="button" class="btn btn-primary submit" (click)="update_movie($event)">Update</button>
         </div>
-      </div>
       </form>
     </div>
   </div>

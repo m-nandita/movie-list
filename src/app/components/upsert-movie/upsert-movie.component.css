@@ -11,8 +11,28 @@
 }
 
 .form-container {
-  width: 800px
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }
+.movie-img-container {
+  order: 1;
+  margin-right: 20px;
+}
+.button-container {
+  order: 3;
+  margin-left: -200px;
+  margin-top: 150px;
+  > * {
+    margin-right: 20px;
+  }
+}
+.input-container {
+  order: 2;
+  height: fit-content;
+}
+
 .file-input-label {
   height: 400px;
   width: 400px;
@@ -49,4 +69,15 @@ input[type="text"] {
 .cancel {
   background-color: #093545;
   border-style: 1px solid #ffffff;
+}
+
+
+@media screen and (max-width: 428px) {
+  .form-container {
+    display: inline;
+  }
+  .button-container {
+    margin-left: 0px;
+  margin-top: 0px;
+  }
 }
