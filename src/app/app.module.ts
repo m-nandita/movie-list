@@ -7,7 +7,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { UpsertMovieComponent } from './components/upsert-movie/upsert-movie.component';
 import { FormsModule } from '@angular/forms';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

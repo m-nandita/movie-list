@@ -33,8 +33,6 @@ export class UpsertMovieComponent {
       this.title = this.movie.title;
       this.published_year = this.movie.published_year;
       this.selectedImage = this.movie.url;
-      this.posterFile = this.movie.poster_img;
-      console.log(this.movie)
     }
   }
 
@@ -59,11 +57,14 @@ export class UpsertMovieComponent {
       let new_movie = {title: this.title, published_year: this.published_year}
       this.movieService.createMovie(new_movie, this.posterFile).subscribe((event: any) => {
         console.log('Image uploaded')
+        this.router.navigate(['/movielist'])
       })
     }
   }
 
-
+  logout() {
+    this.router.navigate(['/signin'])
+  }
   cancel() {
     this.router.navigate(['/movielist'])
   }

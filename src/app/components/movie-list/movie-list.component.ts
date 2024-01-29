@@ -9,20 +9,11 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieListComponent {
   movies?: any;
+  p: any = 1;
+
   constructor(private movieService: MovieService, private router: Router, private route: ActivatedRoute) {}
-  offset?: number;
-  limit?: number;
-  total_movies?: number;
-  page?: number;
   ngOnInit() {
 
-    // this.movieService.getPage(1, 8).subscribe({
-    //   next: (data) => {
-    //     if(data) {
-    //       this.movies = data;
-    //     }
-    //   }
-    // })
     this.movieService.getMovies().subscribe({
       next: (data) => {
         if(data) {
@@ -41,21 +32,7 @@ export class MovieListComponent {
   }
 
   logout() {
-
+    this.router.navigate(['/signin'])
   }
 
-  loadPage(event: any) {
-    let pageNumber = event.target.value - 1;
-    this.movieService.getPage(8 * pageNumber, 8).subscribe({
-      next: (data) => {
-        if(data) {
-          this.movies = data;
-        }
-      }
-    })
-
-  }
-  numSequence(n: number): Array<number> {
-    return Array(n);
-  }
 }

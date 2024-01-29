@@ -3,7 +3,7 @@
 }
 
 .movie-list-container {
-  width: 1440px;
+  width: 100%;
 }
 
 .movie-empty-container {
@@ -20,7 +20,7 @@
 
 .card {
   background-color: #092C39;
-  width: 18rem;
+  width: 70%;
   margin-right: 10px;
   margin-bottom: 20px;
 }

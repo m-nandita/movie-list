@@ -37,11 +37,9 @@
     <div>
       <form class="form-container d-flex flex-row justify-content-around">
       <div class="movie-img-container">
-        <!-- <input type="file" class="movie-img" id ='file-input' name="poster_img" /> -->
-        <!-- <label class="file-input-label" for="file-input"></label> -->
         <input type="file" class="movie-img" id ='file-input' name="poster_img" (change)="select_poster($event)"/>
         <div *ngIf="selectedImage; else img_label">
-          <img src="{{ selectedImage }}" (click)="replace()"/>
+          <img src="{{ selectedImage }}" (click)="replace()" height="350px" width="200px"/>
         </div>
         <ng-template #img_label>
           <label class="file-input-label" for="file-input" >
