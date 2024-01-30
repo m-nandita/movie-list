@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Movie } from 'src/app/models/movie';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { MovieService } from 'src/app/services/movie.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-upsert-movie',
@@ -10,7 +11,7 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./upsert-movie.component.css']
 })
 export class UpsertMovieComponent {
-  
+
   isCreate?: boolean;
   movie_id?: number | undefined;
   title?: string;
@@ -19,21 +20,24 @@ export class UpsertMovieComponent {
   selectedImage?: any = null;
   posterFile: File  | null = null;
 
-  constructor(private router: Router, private movieService: MovieService) {}
+  constructor(private router: Router, private movieService: MovieService, private authService: AuthService) {}
 
   ngOnInit() {
-
-    if(this.router.url == '/addmovie') {
-      this.isCreate = true;
+    if(localStorage.getItem('accessToken') != null) {
+      if(this.router.url == '/addmovie') {
+        this.isCreate = true;
+      }
+      else if(this.router.url == '/editmovie') {
+        this.isCreate = false;
+        this.movie = this.router.lastSuccessfulNavigation?.extras
+        this.movie_id = this.movie.id;
+        this.title = this.movie.title;
+        this.published_year = this.movie.published_year;
+        this.selectedImage = this.movie.url;
+      }
     }
-    else if(this.router.url == '/editmovie') {
-      this.isCreate = false;
-      this.movie = this.router.lastSuccessfulNavigation?.extras
-      this.movie_id = this.movie.id;
-      this.title = this.movie.title;
-      this.published_year = this.movie.published_year;
-      this.selectedImage = this.movie.url;
-      this.posterFile
+    else {
+      this.router.navigate(['/signin'])
     }
   }
 
@@ -63,9 +67,6 @@ export class UpsertMovieComponent {
     }
   }
 
-  logout() {
-    this.router.navigate(['/signin'])
-  }
   cancel() {
     this.router.navigate(['/movielist'])
   }

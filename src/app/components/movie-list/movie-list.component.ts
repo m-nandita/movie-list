@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -10,17 +11,21 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MovieListComponent {
   movies?: any;
   p: any = 1;
-
-  constructor(private movieService: MovieService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private movieService: MovieService, private router: Router, private authService: AuthService) {
+  }
   ngOnInit() {
-
-    this.movieService.getMovies().subscribe({
+    // if(localStorage.getItem('accessToken') != null) {
+      this.movieService.getMovies().subscribe({
       next: (data) => {
         if(data) {
           this.movies = data;
         }
       }
-    })
+      })
+    // }
+    // else {
+    //   this.router.navigate(['/signin'])
+    // }
   }
 
   edit_movie(movie: any) {
@@ -32,7 +37,7 @@ export class MovieListComponent {
   }
 
   logout() {
-    this.router.navigate(['/signin'])
+    this.authService.logOut();
   }
 
 }

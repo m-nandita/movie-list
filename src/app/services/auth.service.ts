@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Token } from '../models/token';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -14,9 +14,9 @@ export class AuthService {
   private tokenSubject?: BehaviorSubject<Token>;
   private token?: Observable<Token>;
 
-  constructor(private http: HttpClient) {
-    let storedToken = localStorage.getItem('accessToken') || "";
-    this.tokenSubject = new BehaviorSubject<Token>(JSON.parse(storedToken));
+  constructor(private http: HttpClient, private route: Router) {
+    let storedToken = localStorage.getItem('accessToken');
+    this.tokenSubject = new BehaviorSubject<Token>(JSON.parse(storedToken ? storedToken : '{}'));
     this.token = this.tokenSubject.asObservable();
   }
 
@@ -27,5 +27,15 @@ export class AuthService {
       this.tokenSubject?.next(user_token);
       return user_token;
     }))
+  }
+
+  logOut() {
+    localStorage.clear();
+    this.tokenSubject?.next({});
+    this.route.navigate(['/signin']);
+  }
+
+  public tokenValue(): Token | undefined {
+    return this.tokenSubject?.value
   }
 }

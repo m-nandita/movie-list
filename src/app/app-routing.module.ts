@@ -5,6 +5,7 @@ import { UpsertMovieComponent } from './components/upsert-movie/upsert-movie.com
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'signin', pathMatch: 'full'},
   { path: 'signin', component: SignInComponent },
   { path: 'addmovie', component: UpsertMovieComponent},
   { path: 'editmovie', component: UpsertMovieComponent},
