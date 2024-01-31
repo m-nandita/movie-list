@@ -13,7 +13,7 @@ export class AuthService {
   private baseUrl = "http://localhost:8081/api/auth";
   private tokenSubject?: BehaviorSubject<Token>;
   private token?: Observable<Token>;
-
+  // private isLoggedIn?: boolean;
   constructor(private http: HttpClient, private route: Router) {
     let storedToken = localStorage.getItem('accessToken');
     this.tokenSubject = new BehaviorSubject<Token>(JSON.parse(storedToken ? storedToken : '{}'));
@@ -25,6 +25,7 @@ export class AuthService {
       const user_token: Token = token;
       localStorage.setItem('accessToken', JSON.stringify(user_token))
       this.tokenSubject?.next(user_token);
+      // this.isLoggedIn = true;
       return user_token;
     }))
   }
@@ -32,10 +33,15 @@ export class AuthService {
   logOut() {
     localStorage.clear();
     this.tokenSubject?.next({});
+    // this.isLoggedIn = false;
     this.route.navigate(['/signin']);
   }
 
-  public tokenValue(): Token | undefined {
+  public get tokenValue(): Token | undefined {
     return this.tokenSubject?.value
   }
+
+  // public get isLogIn(): boolean | undefined {
+  //   return this.isLoggedIn
+  // }
 }

@@ -16,9 +16,9 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     const isAPIurl = request.url.startsWith('http://localhost:8081')
-    if(this.authService.tokenValue() && isAPIurl) {
+    if(this.authService.tokenValue && isAPIurl) {
       request = request.clone(
-        { setHeaders: { Authorization: `Bearer ${JSON.stringify(this.authService.tokenValue())}`}}
+        { setHeaders: { Authorization: `Bearer ${JSON.stringify(this.authService.tokenValue)}`}}
       )
     }
     return next.handle(request);

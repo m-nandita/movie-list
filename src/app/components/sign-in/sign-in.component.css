@@ -1,5 +1,5 @@
 .sign-in-container {
-   width: 300px;
+   min-width: 300px;
 }
 
 input[type="email"], input[type="password"] {

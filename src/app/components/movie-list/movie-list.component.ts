@@ -14,7 +14,7 @@ export class MovieListComponent {
   constructor(private movieService: MovieService, private router: Router, private authService: AuthService) {
   }
   ngOnInit() {
-    // if(localStorage.getItem('accessToken') != null) {
+    if(localStorage.getItem('accessToken')) {
       this.movieService.getMovies().subscribe({
       next: (data) => {
         if(data) {
@@ -22,10 +22,10 @@ export class MovieListComponent {
         }
       }
       })
-    // }
-    // else {
-    //   this.router.navigate(['/signin'])
-    // }
+    }
+    else {
+      this.router.navigate(['/signin'])
+    }
   }
 
   edit_movie(movie: any) {

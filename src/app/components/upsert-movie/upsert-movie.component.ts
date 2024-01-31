@@ -20,10 +20,10 @@ export class UpsertMovieComponent {
   selectedImage?: any = null;
   posterFile: File  | null = null;
 
-  constructor(private router: Router, private movieService: MovieService, private authService: AuthService) {}
+  constructor(private router: Router, private movieService: MovieService) {}
 
   ngOnInit() {
-    if(localStorage.getItem('accessToken') != null) {
+    if(localStorage.getItem('accessToken')) {
       if(this.router.url == '/addmovie') {
         this.isCreate = true;
       }
@@ -34,6 +34,9 @@ export class UpsertMovieComponent {
         this.title = this.movie.title;
         this.published_year = this.movie.published_year;
         this.selectedImage = this.movie.url;
+      }
+      else {
+        this.router.navigate(['/signin'])
       }
     }
     else {

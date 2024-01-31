@@ -14,8 +14,7 @@ export class SignInComponent {
 
   login() {
     if(this.email && this.password) {
-      this.authService.login(this.email, this.password).subscribe(() => { console.log('Logged in')})
-      this.router.navigate(['./movielist'])
+      this.authService.login(this.email, this.password).subscribe(() => {this.router.navigate(['./movielist'])})
     }
   }
 

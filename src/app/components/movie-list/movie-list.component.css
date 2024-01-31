@@ -1,8 +1,10 @@
 * {
   color: #ffffff;
 }
-.movie-list-container {
-  width: 100%;
+
+.add-movie {
+  background: none;
+  border: none;
 }
 .movie-empty-container {
   display: flex;
@@ -29,6 +31,9 @@
   height: 200px;
 }
 
+.card-width {
+  width: 25%;
+}
 .logout img {
   content: url('../../../assets/images/logoutIcon.png')
  }
@@ -37,7 +42,7 @@
    .card {
     width: 100%;
    }
-  
+
    .card-width {
     width: 50%;
    }
@@ -45,4 +50,17 @@
    .logout img {
     content: url('../../../assets/images/logoutMobile.png')
    }
+}
+@media screen and (max-width: 768px) {
+  .card {
+   width: 100%;
+  }
+
+  .card-width {
+   width: 50%;
+  }
+
+  .logout img {
+   content: url('../../../assets/images/logoutMobile.png')
+  }
 }
