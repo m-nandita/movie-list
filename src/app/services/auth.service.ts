@@ -6,42 +6,45 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  private baseUrl = "http://localhost:8081/api/auth";
+  private baseUrl = 'http://localhost:8081/api/auth';
   private tokenSubject?: BehaviorSubject<Token>;
-  private token?: Observable<Token>;
-  // private isLoggedIn?: boolean;
+  private token: Observable<Token>;
   constructor(private http: HttpClient, private route: Router) {
     let storedToken = localStorage.getItem('accessToken');
-    this.tokenSubject = new BehaviorSubject<Token>(JSON.parse(storedToken ? storedToken : '{}'));
+    this.tokenSubject = new BehaviorSubject<Token>(
+      JSON.parse(storedToken ? storedToken : '{}')
+    );
     this.token = this.tokenSubject.asObservable();
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<Token>(this.baseUrl + '/signin', {email, password}).pipe(map(token => {
-      const user_token: Token = token;
-      localStorage.setItem('accessToken', JSON.stringify(user_token))
-      this.tokenSubject?.next(user_token);
-      // this.isLoggedIn = true;
-      return user_token;
-    }))
+    return this.http
+      .post<Token>(this.baseUrl + '/signin', { email, password })
+      .pipe(
+        map((token) => {
+          const user_token: Token = token;
+          localStorage.setItem('accessToken', JSON.stringify(user_token));
+          this.tokenSubject?.next(user_token);
+          localStorage.setItem('isLoggedIn', JSON.stringify(true))
+          return user_token;
+        })
+      );
   }
 
   logOut() {
     localStorage.clear();
     this.tokenSubject?.next({});
-    // this.isLoggedIn = false;
     this.route.navigate(['/signin']);
   }
 
   public get tokenValue(): Token | undefined {
-    return this.tokenSubject?.value
+    return this.tokenSubject?.value;
   }
 
-  // public get isLogIn(): boolean | undefined {
-  //   return this.isLoggedIn
-  // }
+  public get isLogIn(): string | undefined{
+    return localStorage.getItem('isLoggedIn')?.toString();
+  }
 }

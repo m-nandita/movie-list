@@ -6,26 +6,24 @@ import { MovieService } from 'src/app/services/movie.service';
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
-  styleUrls: ['./movie-list.component.css']
+  styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent {
   movies?: any;
   p: any = 1;
-  constructor(private movieService: MovieService, private router: Router, private authService: AuthService) {
-  }
+  constructor(
+    private movieService: MovieService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
   ngOnInit() {
-    if(localStorage.getItem('accessToken')) {
-      this.movieService.getMovies().subscribe({
+    this.movieService.getMovies().subscribe({
       next: (data) => {
-        if(data) {
+        if (data) {
           this.movies = data;
         }
-      }
-      })
-    }
-    else {
-      this.router.navigate(['/signin'])
-    }
+      },
+    });
   }
 
   edit_movie(movie: any) {
@@ -33,11 +31,10 @@ export class MovieListComponent {
   }
 
   add_new_movie() {
-    this.router.navigate(['/addmovie'])
+    this.router.navigate(['/addmovie']);
   }
 
   logout() {
     this.authService.logOut();
   }
-
 }
